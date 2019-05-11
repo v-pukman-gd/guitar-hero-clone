@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://note_picker.gd" type="Script" id=1]
+[ext_resource path="res://green_note_mat.tres" type="Material" id=2]
+
+[sub_resource type="PlaneMesh" id=1]
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.257625, 0.366085, 0.245995 )
+
+[node name="NotePicker" type="Spatial"]
+script = ExtResource( 1 )
+line = 1
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.4, 0, 0, 0, 1, 0, 0, 0, 0.4, 0, 0.01, 0 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="Area" type="Area" parent="." groups=[
+"picker",
+]]
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+shape = SubResource( 2 )
+
