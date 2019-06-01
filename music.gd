@@ -1,6 +1,7 @@
 extends Spatial
 
 onready var player = $AudioStreamPlayer
+onready var anim = $AnimationPlayer
 
 var speed
 var started
@@ -21,6 +22,7 @@ func setup(game):
 func start():
 	started = true
 	player.play(start_pos_in_sec)
+	anim.play("sound_on")
 	
 func _process(delta):
 	if not started:
