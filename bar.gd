@@ -21,7 +21,10 @@ var notes_data = [
 	}
 ] 
 
-var note_scale = 0.005
+# bar length - 1600
+# bar length in m - 1600 * 0.005 = 8
+
+var note_scale # 0.005
 
 func _ready():
 	add_notes()
