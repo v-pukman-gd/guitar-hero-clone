@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://note/long_note.gd" type="Script" id=1]
-[ext_resource path="res://yellow_note_mat.tres" type="Material" id=2]
+[ext_resource path="res://note/yellow_note_mat.tres" type="Material" id=2]
 [ext_resource path="res://note/beam.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CubeMesh" id=1]

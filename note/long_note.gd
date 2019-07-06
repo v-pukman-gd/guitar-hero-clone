@@ -11,6 +11,7 @@ func _on_ready():
 	._on_ready()
 	curr_length_in_m = max(100, length - 100)*length_scale
 	$Beam.scale = Vector3(1,1,curr_length_in_m)
+	$Beam.set_material(line)
 	
 func _on_process(delta):
 	._on_process(delta)
