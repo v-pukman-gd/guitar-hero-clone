@@ -6,16 +6,27 @@ var yellow_mat = preload("res://yellow_note_mat.tres")
 
 export(int, 1, 3) var line
 var position = 0
+var length
+var length_scale
+var speed
+
 var is_colliding = false
 var collected = false
 var picker
 
 func _ready():
+	_on_ready()
+	
+func _on_ready():
 	set_material()
 	set_position()
+	add_listeners()
 	
 func _process(delta):
-	collect()
+	_on_process(delta)
+	
+func _on_process(delta):
+	pass
 	
 func set_material():
 	match line:
@@ -35,16 +46,18 @@ func set_position():
 			x = 0
 		3:
 			x = 1
-	self.translation = Vector3(x,0,-position)
+	self.translation = Vector3(x,0,-position*length_scale)
+	
+func add_listeners():
+	$Area.add_to_group("note")
+	$Area.connect("area_entered", self, "_on_area_entered")
+	$Area.connect("area_exited", self, "_on_area_exited")
+	
 	
 func collect():
-	if not collected:
-		if is_colliding and picker:
-			if picker.is_collecting:
-				collected = true
-				picker.is_collecting = false
-				hide()
-
+	collected = true
+	picker.is_collecting = false
+	hide()
 
 func _on_area_entered(area):
 	if area.is_in_group("picker"):
