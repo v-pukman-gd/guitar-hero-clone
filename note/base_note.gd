@@ -14,6 +14,8 @@ var is_colliding = false
 var collected = false
 var picker
 
+onready var cover = $NoteMesh/NoteCover
+
 func _ready():
 	_on_ready()
 	
@@ -31,11 +33,11 @@ func _on_process(delta):
 func set_material():
 	match line:
 		1:
-			$MeshInstance.material_override = green_mat
+			cover.material_override = green_mat
 		2:
-			$MeshInstance.material_override = red_mat
+			cover.material_override = red_mat
 		3:
-			$MeshInstance.material_override = yellow_mat
+			cover.material_override = yellow_mat
 			
 func set_position():
 	var x 

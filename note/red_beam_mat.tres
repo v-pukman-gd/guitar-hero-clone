@@ -18,4 +18,3 @@ emission_energy = 0.7
 emission_operator = 1
 emission_on_uv2 = false
 emission_texture = SubResource( 2 )
-
