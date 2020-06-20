@@ -1,15 +1,16 @@
 extends Spatial
 
-var green_mat = preload("res://green_picker_mat.tres")
-var red_mat = preload("res://red_picker_mat.tres")
-var yellow_mat = preload("res://yellow_picker_mat.tres")
+var green_mat = preload("res://picker/green_picker_mat.tres")
+var red_mat = preload("res://picker/red_picker_mat.tres")
+var yellow_mat = preload("res://picker/yellow_picker_mat.tres")
 
 export(int, 1,3) var line
 
 var is_pressed = false
 var is_collecting = false
 
-onready var mesh = $MeshInstance
+onready var cover = $PickerBottom/PickerBottomColor
+onready var trigger = $PickerTop
 
 func _ready():
 	set_material()
@@ -18,11 +19,11 @@ func _ready():
 func set_material():
 	match line:
 		1:
-			mesh.material_override = green_mat
+			cover.material_override = green_mat
 		2:
-			mesh.material_override = red_mat
+			cover.material_override = red_mat
 		3:
-			mesh.material_override = yellow_mat
+			cover.material_override = yellow_mat
 
 func _input(event):
 	match line:
@@ -51,6 +52,6 @@ func _input(event):
 				
 func _process(delta):
 	if is_pressed:
-		self.scale = Vector3(0.9, 0.9, 0.9)
+		trigger.translation = Vector3(0, 0.15, 0)
 	else:
-		self.scale = Vector3(1,1,1)
+		trigger.translation = Vector3(0, 0.08, 0)

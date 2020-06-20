@@ -14,7 +14,8 @@ script = ExtResource( 1 )
 [node name="Road" parent="." instance=ExtResource( 2 )]
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.857854, 0.513893, 0, -0.513893, 0.857854, 0, 2.75483, 1.40264 )
+transform = Transform( 1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 2.714, 3.647 )
+keep_aspect = 0
 current = true
 far = 15.0
 
