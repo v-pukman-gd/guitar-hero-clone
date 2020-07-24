@@ -8,6 +8,7 @@ var bar_length_in_m
 var curr_location
 var speed
 var note_scale
+var surface_speed
 
 var curr_bar_index
 var tracks_data 
@@ -19,7 +20,9 @@ func setup(game):
 	note_scale = game.note_scale
 	curr_bar_index = 0
 	tracks_data = game.map.tracks
+	surface_speed = Vector3(-game.quarter_time_in_sec, 0, 0)
 	add_bars()
+	apply_surface_speed()
 	
 		
 func _process(delta):
@@ -56,3 +59,6 @@ func add_bars():
 	for i in range(4):
 		add_bar()
 	
+func apply_surface_speed():
+	var mat = $RoadSurface/Plane.get_surface_material(0)
+	mat.set_shader_param("Speed", surface_speed)
