@@ -1,11 +1,63 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://picker/note_picker.gd" type="Script" id=1]
+[ext_resource path="res://particles/fire2.jpg" type="Texture" id=2]
 [ext_resource path="res://picker/picker_bottom.tscn" type="PackedScene" id=3]
 [ext_resource path="res://picker/picker_top.tscn" type="PackedScene" id=4]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.257625, 0.366085, 0.245995 )
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0.0030581, 0.0733945, 0.119266, 0.189602, 0.238532 )
+colors = PoolColorArray( 0.996094, 0.987436, 0.964966, 1, 0.996094, 0.789689, 0.241241, 1, 0.983522, 0.305938, 0.110514, 1, 0.414062, 0.011322, 0.011322, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 2
+emission_box_extents = Vector3( 0.1, 0.1, 0.1 )
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 2.0
+linear_accel = 1.0
+color_ramp = SubResource( 5 )
+anim_speed = 3.0
+anim_offset = 1.0
+anim_offset_random = 1.0
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_cull_mode = 2
+params_billboard_mode = 3
+particles_anim_h_frames = 4
+particles_anim_v_frames = 4
+particles_anim_loop = true
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="QuadMesh" id=2]
+material = SubResource( 6 )
+
+[sub_resource type="Animation" id=7]
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Fire/Particles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.01, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
 
 [node name="NotePicker" type="Spatial"]
 script = ExtResource( 1 )
@@ -23,3 +75,17 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.208871, 0 )
 
 [node name="PickerTop" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0 )
+
+[node name="Fire" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.615788, 0 )
+
+[node name="Particles" type="Particles" parent="Fire"]
+transform = Transform( 1, 0, 0, 0, 0.0207102, 0, 0, 0, 1, 0, -0.0634018, 0 )
+emitting = false
+amount = 64
+visibility_aabb = AABB( -4, -6.92717, -4, 8, 13.8543, 8 )
+process_material = SubResource( 3 )
+draw_pass_1 = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fire_on = SubResource( 7 )

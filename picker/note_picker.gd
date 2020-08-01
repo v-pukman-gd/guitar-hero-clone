@@ -11,6 +11,7 @@ var is_collecting = false
 
 onready var cover = $PickerBottom/PickerBottomColor
 onready var trigger = $PickerTop
+onready var anim = $AnimationPlayer
 
 func _ready():
 	set_material()
@@ -55,3 +56,8 @@ func _process(delta):
 		trigger.translation = Vector3(0, 0.15, 0)
 	else:
 		trigger.translation = Vector3(0, 0.08, 0)
+		
+func on_collect():
+	is_collecting = false
+	
+	anim.play("fire_on")

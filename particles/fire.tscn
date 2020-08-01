@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://particles/fire2.jpg" type="Texture" id=1]
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0.0030581, 0.0733945, 0.119266, 0.189602, 0.238532 )
+colors = PoolColorArray( 0.996094, 0.987436, 0.964966, 1, 0.996094, 0.789689, 0.241241, 1, 0.983522, 0.305938, 0.110514, 1, 0.414062, 0.011322, 0.011322, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 2
+emission_box_extents = Vector3( 0.1, 0.1, 0.1 )
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 2.0
+linear_accel = 1.0
+color_ramp = SubResource( 5 )
+anim_speed = 3.0
+anim_offset = 1.0
+anim_offset_random = 1.0
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_cull_mode = 2
+params_billboard_mode = 3
+particles_anim_h_frames = 4
+particles_anim_v_frames = 4
+particles_anim_loop = true
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="QuadMesh" id=2]
+material = SubResource( 6 )
+
+[node name="Fire" type="Spatial"]
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.328493, 0, 0, 0, 1, 0, 0, 0 )
+emitting = false
+amount = 32
+visibility_aabb = AABB( -4, -6.92717, -4, 8, 13.8543, 8 )
+process_material = SubResource( 3 )
+draw_pass_1 = SubResource( 2 )

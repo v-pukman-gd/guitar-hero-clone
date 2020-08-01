@@ -58,7 +58,7 @@ func add_listeners():
 	
 func collect():
 	collected = true
-	picker.is_collecting = false
+	picker.on_collect()
 	hide()
 
 func _on_area_entered(area):
